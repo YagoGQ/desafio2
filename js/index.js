@@ -1,4 +1,4 @@
-let producto = parseInt(prompt(`Elije el producto que desea comprar 1.botas de esqui - 2.velas - 3.coctelera - 4.olla para hacer fondiue`));
+let productoElejido = parseInt(prompt(`Elije el producto que desea comprar 1.botas de esqui - 2.velas - 3.coctelera - 4.olla para hacer fondiue`));
 
 let seguirComprando = true;
 let totalCompra = 0;
@@ -14,26 +14,33 @@ class Product {
     }
 };
 
-const botas = new Product(1, `botas`, 2000);
+const botas = new Product (1, `botas`, 2000);
 mercaderia.push (botas);
-const velas = new Product(2 , `velas`, 300);
+const velas = new Product (2 , `velas`, 300);
 mercaderia.push (velas);
-const coctelera = new Product(3, `coctelera`, 890);
+const coctelera = new Product (3, `coctelera`, 890);
 mercaderia.push (coctelera);
-const fondiue = new Product(4, `fondiue`, 4500);
+const fondiue = new Product (4, `fondiue`, 4500);
 mercaderia.push (fondiue);
 
-console.log (mercaderia);
+const carrito = [];
 
 while (seguirComprando === true) {
-    const producto = mercaderia.find (prod=>prod.id === producto)
-    totalCompra = totalCompra + mercaderia [producto-1].price
+    const producto = mercaderia.find (
+        (prod) => prod.id === productoElejido
+    );
+    if (producto) {
+    carrito.push(producto)
+    }
+    // totalCompra = totalCompra + producto.price
 
     decision = parseInt(prompt(`¿Quiere seguir comprando? 1.Si - 2.No`))
     if (decision === 1) {
-        producto = parseInt(prompt(`Elije el producto que desea comprar 1.botas de esqui - 2.velas - 3.coctelera - 4.olla para hacer fondiue`));
+        productoElejido = parseInt(prompt(`Elije el producto que desea comprar 1.botas de esqui - 2.velas - 3.coctelera - 4.olla para hacer fondiue`));
     } else { seguirComprando = false}
 };
+totalCompra = carrito.map(producto => producto.price).reduce((a,b) => a+b)
+console.log (carrito);
 
 function descuento(totalCompra) {
     let descuento = 0
